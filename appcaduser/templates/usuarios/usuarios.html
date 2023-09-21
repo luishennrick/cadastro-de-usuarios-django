@@ -1,0 +1,27 @@
+{% extends "usuarios/default.html" %}
+{% block conteudo %}
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+<body>
+
+<h2>Lista de Usuários</h2>
+
+<table style="width:100%">
+  <tr>
+    <th>Id</th>
+    <th>Nome</th>
+    <th>Idade</th>
+  </tr>
+  {% for usuario in usuarios %}
+  <tr>
+    <td>{{usuario.id}}</td>
+    <td>{{usuario.nome}}</td>
+    <td>{{usuario.idade}}</td>
+  </tr>
+  {% endfor %}
+</table>
+</body>
+{% endblock %}

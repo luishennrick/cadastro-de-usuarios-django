@@ -1,0 +1,17 @@
+{% extends "usuarios/default.html" %}
+{% block conteudo %}
+    <form action="{% url 'lista' %}" method="post"> 
+        {% csrf_token %}
+        <div>
+        <label>Nome</label>
+        <input type="text"
+          class="form-control" name="nome" aria-describedby="helpId" placeholder="Digite um nome">
+          <br/>
+        <label>Idade</label>
+        <input type="text"
+          class="form-control" name="idade" aria-describedby="helpId" placeholder="Digite sua idade">
+          <br/>
+        <button name="" id="" class="btn btn-primary" href="#" role="button">Enviar</button>
+      </div>
+    </form>
+{% endblock %}
