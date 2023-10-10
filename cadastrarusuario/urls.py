@@ -11,7 +11,13 @@ urlpatterns = [
     path(
         'user/api/v1',
         views.user_api_list,
-        name='user/api/v1'
-    )
+        name='user_api_v1'
+    ),
+
+    path(
+        'user/api/v1/<int:pk>/',
+        views.user_api_detail,
+        name='user_api_v1_detail'
+    ),
   
 ]
