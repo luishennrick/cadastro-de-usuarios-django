@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Usuario
+from ..models import Usuario
 
 def home(request):
     return render(request,'usuarios/home.html')
