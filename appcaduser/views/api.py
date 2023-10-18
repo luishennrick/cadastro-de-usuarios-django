@@ -6,11 +6,19 @@ from rest_framework import status
 from ..models import Usuario
 from ..serializers import UserSerializer
 
-@api_view()
+@api_view(http_method_names=['get', 'post'])
 def user_api_list(request):
-    usuario = Usuario.objects
-    serializer = UserSerializer(instance=usuario, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        usuario = Usuario.objects
+        serializer = UserSerializer(instance=usuario, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 @api_view()
