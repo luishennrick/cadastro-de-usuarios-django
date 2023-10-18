@@ -16,17 +16,28 @@ def user_api_list(request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
-@api_view()
+@api_view(http_method_names=['get', 'patch', 'delete'])
 def user_api_detail(request, pk):
     usuario = Usuario.objects.filter(pk=pk).first()
     if usuario:
-        serializer = UserSerializer(instance=usuario, many=False)
-        return Response(serializer.data)
+        if request.method == 'GET':
+            serializer = UserSerializer(instance=usuario, many=False)
+            return Response(serializer.data)
+        elif request.method == 'PATCH':
+            serializer = UserSerializer(
+                instance=usuario, data=request.data, 
+                many=False, partial=True)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data)
+        elif request.method == 'DELETE':
+            usuario.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
     
     else:
         return Response({
