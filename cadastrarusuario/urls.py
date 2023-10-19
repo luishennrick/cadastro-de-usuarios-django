@@ -10,13 +10,13 @@ urlpatterns = [
 
     path(
         'user/api/v1',
-        views.user_api_list,
+        views.UserApiList.as_view(),
         name='user_api_v1'
     ),
 
     path(
         'user/api/v1/<int:pk>/',
-        views.user_api_detail,
+        views.UserApiListDetail.as_view(),
         name='user_api_v1_detail'
     ),
   
