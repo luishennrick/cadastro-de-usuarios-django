@@ -1,19 +1,16 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from django.shortcuts import get_object_or_404
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.pagination import PageNumberPagination
 
 from ..models import Usuario
 from ..serializers import UserSerializer
 
+class Paginacao(PageNumberPagination):
+    page_size = 3
 
-class UserApiList(ListCreateAPIView):
-    queryset = Usuario.objects
-    serializer_class = UserSerializer
 
-class UserApiListDetail(RetrieveUpdateDestroyAPIView):
-    queryset = Usuario.objects
+class UserApiListViewSet(ModelViewSet):
+    queryset = Usuario.objects.all()
     serializer_class = UserSerializer
+    pagination_class = Paginacao
+
 

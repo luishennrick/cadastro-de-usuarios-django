@@ -10,13 +10,20 @@ urlpatterns = [
 
     path(
         'user/api/v1',
-        views.UserApiList.as_view(),
+        views.UserApiListViewSet.as_view({
+            'get': 'list',
+            'post': 'create'
+        }),
         name='user_api_v1'
     ),
 
     path(
         'user/api/v1/<int:pk>/',
-        views.UserApiListDetail.as_view(),
+        views.UserApiListViewSet.as_view({
+            'get': 'retrieve',
+            'patch': 'partial_update',
+            'delete': 'destroy'
+        }),
         name='user_api_v1_detail'
     ),
   
