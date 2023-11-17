@@ -2,29 +2,12 @@ from appcaduser import views
 
 from django.urls import path
 
-urlpatterns = [
+from rest_framework.routers import SimpleRouter
 
-    path('', views.site.home, name='home'),
+user_api_router = SimpleRouter()
+user_api_router.register(
+    'api/list/usuario',
+    views.UserApiListViewSet
+)
 
-    path('usuarios/', views.site.usuarios, name='lista'),
-
-    path(
-        'user/api/v1',
-        views.UserApiListViewSet.as_view({
-            'get': 'list',
-            'post': 'create'
-        }),
-        name='user_api_v1'
-    ),
-
-    path(
-        'user/api/v1/<int:pk>/',
-        views.UserApiListViewSet.as_view({
-            'get': 'retrieve',
-            'patch': 'partial_update',
-            'delete': 'destroy'
-        }),
-        name='user_api_v1_detail'
-    ),
-  
-]
+urlpatterns = user_api_router.urls
