@@ -15,7 +15,8 @@ from rest_framework_simplejwt.views import (
 user_api_router = SimpleRouter()
 user_api_router.register(
     'api/list/usuario',
-    views.UserApiListViewSet
+    views.UserApiListViewSet,
+    basename='user-api'
 )
 
 urlpatterns = [
