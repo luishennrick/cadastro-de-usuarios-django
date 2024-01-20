@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Usuario
+from ..models import Usuario
 
 def home(request):
     return render(request,'usuarios/home.html')
@@ -9,6 +9,7 @@ def usuarios(request):
     # Salvar os dados no banco
     usuario = Usuario()
     usuario.nome = request.POST.get('nome')
+    usuario.sobrenome = request.POST.get('sobrenome')
     usuario.idade = request.POST.get('idade')
     usuario.save()
 

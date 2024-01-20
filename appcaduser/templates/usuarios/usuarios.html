@@ -13,12 +13,14 @@ table, th, td {
   <tr>
     <th>Id</th>
     <th>Nome</th>
+    <th>Sobrenome</th>
     <th>Idade</th>
   </tr>
   {% for usuario in usuarios %}
   <tr>
     <td>{{usuario.id}}</td>
     <td>{{usuario.nome}}</td>
+    <td>{{usuario.sobrenome}}</td>
     <td>{{usuario.idade}}</td>
   </tr>
   {% endfor %}
